@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap-simplex.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/explanation.css">
+
+  <style>
+    .pie {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+    }
+
+    .chartMenu {
+      flex-direction: column;
+      width: 50vw;
+      height: 40px;
+      color: rgb(255, 255, 255);
+    }
+
+    .chartMenu p {
+      padding: 10px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .chartCard {
+      width: 50vw;
+      height: calc(100vh - 100px);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chartBox {
+      width: 400px;
+      padding: 20px;
+      border-radius: 20px;
+      border: solid 3px #FCBA28;
+      background: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
+    }
+
+     .barChart {
+      width: 70vw;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 50px;
+      font-weight: bolder;
+      color: rgb(255, 255, 255);
+    }
+
+    body {
+    background-color: black;
+    }
+
+    @media only screen and (max-width:730px){
+      .datavisulization{
+          display: none;
+      }
+  }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/bootstrap-slider.js"></script>
+  <link rel="stylesheet" type="text/css" href="./css/cpu-scheduler.css">
+
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    showProcessingMessages: false,
+    messageStyle: "none",
+    tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+  });
+  </script>
+
+  <!-- <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script type="text/javascript" src="./js/MathJaxSetup.js">
+  </script>
+
+  
+
+  <title style="color: #ffffff;">Process scheduling</title>
+  <style>
+
+
+
+    .column {
+    float: left;
+    padding: 15px;
+    }
+    
+    .column1 {
+    float: left;
+    width: 95wv;
+    padding: 15px;
+    margin:10px
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+    
+    .body_name{
+    background-color: #0f0f0f;
+    }
+    
+    
+    
+    .button {
+    background-color: #FCBA28;
+    color: #0f0d0e;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 550;
+    }
+    .button1 {
+    background-color: #0f0d0e; 
+    color: #FCBA28; 
+    border-radius: 5px;
+    border: 2px solid #FCBA28;
+    }
+    
+    .button1:hover {
+    background-color: #FCBA28;
+    color: #0f0d0e;
+    }
+    nav {
+    background-color: #0f0d0e;
+    height: 90px;
+    display:flex;
+    justify-content:space-between;
+    background: rgba(10, 4, 4, 0);
+    position:relative;
+    }
+    .logo {
+    border-radius: 12px;
+    margin: 15px;
+    margin-left: 4%;
+    padding: 18px 10px 2px 10px;
+    background: #231F20;
+    color: #f9f4da;
+    text-align: center;
+    font: 20px 'Outfit', sans-serif;
+    justify-content: center;
+    font-weight: bolder;
+    cursor: pointer;
+    padding-bottom: 20px;
+    
+    }
+    .logo:hover {
+    color: #FCBA28;
+    }
+    
+    ul {
+    list-style: none;
+    margin-right: 4%;
+    padding: 0;
+    display:flex;
+    justify-content:right;
+    align-items: center;
+    height: 100%;
+    }
+    
+    li {
+    margin: 0 20px;
+    
+    }
+    
+    a {
+    color: #FCBA28;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight:bold;
+    text-transform: uppercase;
+    }
+    
+    /* dropdown*/
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 135px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    background: rgba(2, 2, 0, 0.45);
+    border-radius: 5px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
+    
+    }
+    
+    .dropdown-content a {
+    color: #FCBA28;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    cursor: pointer;
+    transition-duration: 0.25s;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 550;
+    font-size: small;
+    
+    }
+    
+    .dropdown-content a:hover {
+    background-color:#FCBA28;
+    color: #0f0d0e;
+    border-radius: 5px;
+    }
+    
+    .dropdown:hover .dropdown-content {
+    display: block;
+    }
+    
+    </style>
+</head>
+
+
+<body>
+
+  <nav>
+    <a class="logo" href="../index.html"> OS VISUALIZER </a>
+    <ul>
+        <li><button onclick="location.href = '../index.html';" class="button button1">Home</button></li>
+        <li class="dropdown"><button class="button button1 dropbtn">Algorithms</button>
+          <div class="dropdown-content">
+              <a href="../process_scheduling/process.html">Process Scheduling</a>
+              <a href="../process_sync\home.html">Process Synchronization</a>
+              <a href="../Bankers/bankers.html">Bankers Algorithm</a>
+              <a href="../mft_mvt/Fit.html">Fit Algorithms</a>
+              <a href="../Page_Replacement Algo/page replacement_home.html">Page Replacement Algorithm</a>
+              <a href="../Disk/disk.html">Disk Scheduling</a>
+              <a href="../file allocation/file.html">File Allocation</a>
+              <a href="../mft_mvt\MVFT.html">MFT and MVT</a>
+          </div>
+      </li>
+        <li><button class="button button1">About</button></li>
+        <li><button class="button button1">References</button></li>
+            </ul>
+            
+        
+       
+        
+  </nav>
+
+
+  <div class="container">
+
+
+
+    <h2 style="text-align: center; color: #ffffff;">CPU&nbsp;scheduler</h2>
+    <p id="adj_counter" style="text-align: center; color: #ffffff;" class="lead">Type values into the table and the chart on the bottom
+      will show how this runs</p>
+
+
+
+
+    <table style="background-color: rgb(255, 255, 255); color: #000000;" class="table table-bordered table-condensed" id="inputTable">
+      <thead>
+        <tr style="background-color: rgb(255, 255, 255); color: #000000;">
+          <th style="color: #000000;">Process:</th>
+          <th style="color: #000000;">Arrival Time:</th>
+          <th style="color: rgb(0, 0, 0);">Burst Time:</th>
+          <th class="priority collapse">Priority:</th>
+        </tr>
+      </thead>
+      <tbody id="processTable">
+        <tr id="row_1" class="collapse in">
+          <th> P1</th>
+          <td><input id="arrive_1" type="number" class="form-control" min="0" value="0" /></td>
+          <td><input type="number" id="burst_1" class="form-control" min="1" value="5" /></td>
+          <td class="priority collapse"><input id="priority_1" type="number" class="form-control" value="1" /></td>
+        </tr>
+
+        <tr id="row_2" class="collapse in">
+          <th> P2 </th>
+          <td><input id="arrive_2" type="number" class="form-control" value="0" /></td>
+          <td><input type="number" id="burst_2" class="form-control" value="2" /></td>
+          <td class="priority collapse"><input id="priority_2" type="number" class="form-control" value="2" /></td>
+        </tr>
+
+        <tr id="row_3" class="collapse in">
+          <th> P3 </th>
+          <td><input id="arrive_3" type="number" class="form-control" value="0" /></td>
+          <td><input id="burst_3" type="number" class="form-control" value="4" /></td>
+          <td class="priority collapse"><input id="priority_3" type="number" class="form-control" value="3" /></td>
+        </tr>
+
+        <tr id="row_4" class="collapse ">
+          <th> P4 </th>
+          <td><input id="arrive_4" type="number" class="form-control" value="0" /></td>
+          <td><input id="burst_4" type="number" class="form-control" value="1" /></td>
+          <td class="priority collapse"><input id="priority_4" type="number" class="form-control" value="4" /></td>
+        </tr>
+
+        <tr id="row_5" class="collapse">
+          <th> P5 </th>
+          <td><input id="arrive_5" type="number" class="form-control" value="0" /></td>
+          <td><input id="burst_5" type="number" class="form-control" value="1" /></td>
+          <td class="priority collapse"><input id="priority_5" type="number" class="form-control" value="5" /></td>
+        </tr>
+
+        <tr id="row_6" class="collapse">
+          <th> P6 </th>
+          <td><input id="arrive_6" type="number" class="form-control" value="0" /></td>
+          <td><input id="burst_6" type="number" class="form-control" value="1" /></td>
+          <td class="priority collapse"><input id="priority_6" type="number" class="form-control" value="6" /></td>
+        </tr>
+
+        <tr id="row_7" class="collapse">
+          <th> P7 </th>
+          <td><input id="arrive_7" type="number" class="form-control" value="0" /></td>
+          <td><input id="burst_7" type="number" class="form-control" value="1" /></td>
+          <td class="priority collapse"><input id="priority_7" type="number" class="form-control" value="7" /></td>
+        </tr>
+
+        <tr id="row_8" class="collapse">
+          <th> P8 </th>
+          <td><input id="arrive_8" type="number" class="form-control" value="0" /></td>
+          <td><input id="burst_8" type="number" class="form-control" value="1" /></td>
+          <td class="priority collapse"><input id="priority_8" type="number" class="form-control" value="8" /></td>
+        </tr>
+
+        <tr id="row_9" class="collapse">
+          <th> P9 </th>
+          <td><input id="arrive_9" type="number" class="form-control" value="0" /></td>
+          <td><input id="burst_9" type="number" class="form-control" value="1" /></td>
+          <td class="priority collapse"><input id="priority_9" type="number" class="form-control" value="9" /></td>
+        </tr>
+
+        <tr id="row_10" class="collapse">
+          <th> P10 </th>
+          <td><input id="arrive_10" type="number" class="form-control" value="0" /></td>
+          <td><input id="burst_10" type="number" class="form-control" value="1" /></td>
+          <td class="priority collapse"><input id="priority_10" type="number" class="form-control" value="10" /></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+
+    <br>
+
+
+
+
+
+    <div class="well">
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <div style=" display:inline-block;">
+            <label style="color: #FCBA28;">Algorithm:</label>
+          </div>
+
+
+          <div class="btn-group algorithm_dropdown" style="margin-left:5px; color: #FCBA28;">
+            <button type="button" style="color: #000000;background-color: #FCBA28;" id="algorithm_button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+              aria-expanded="false">
+              FCFS <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a calcStyle="FCFS" id="simple_calc">First Come First Served</a></li>
+              <li><a calcStyle="SJF" id="simple_calc">Shortest Job First (non-premptive)</a></li>
+              <li><a calcStyle="Round Robin" id="fast_calc">Round Robin</a></li>
+              <li><a calcStyle="Priority" id="fast_calc">Priority</a></li>
+            </ul>
+          </div>
+
+          <p style="margin-top:15px; color: #FCBA28;" id="algorithm_explanation">
+          </p>
+
+        </div><!-- /column -->
+        <div class="col-md-4">
+          <div>
+            <label style="color: #FCBA28;">Number of Processes:</label>
+          </div>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button style="background-color: #FCBA28;color: #000000;" id='remove_row' type="button" class="btn btn-default btn-number minusbtn" data-type="minus">
+                <span class="glyphicon glyphicon-minus"></span>
+              </button>
+            </span>
+            <input style="color: #ffffff;" id="proccess_num" disabled="disabled" class="form-control input-number" value="3">
+            <span class="input-group-btn">
+              <button style="background-color: #FCBA28;color: #000000;" id='add_row' type="button" class="btn btn-default btn-number plusbtn" data-type="plus">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </span>
+          </div>
+
+
+          <div style="margin-top:20px; ">
+            <!-- <label style="color: #FCBA28;">Context Switch Time:</label> -->
+          </div>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <!-- <button id="subtract_context" type="button" class="btn btn-default btn-number" data-type="minus" -->
+                <!-- data-field="quant[1]"> -->
+                <span class="glyphicon glyphicon-minus"></span>
+              </button>
+            </span>
+            <!-- <input id="enter_context" type="text" name="quant[1]" class="form-control input-number" value="0.0" -->
+              <!-- style="background-color:white"> -->
+            <span class="input-group-btn">
+              <!-- <button id="add_context" type="button" class="btn btn-default btn-number" data-type="plus" -->
+                data-field="quant[1]">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </span>
+          </div>
+
+          <div class="hidden" id="solver_group">
+            <div style="margin-top:20px; ">
+              <label>Time Quantum:</label>
+            </div>
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button style="background-color: #FCBA28; color: #000000;" id="subtract_quantum" type="button" class="btn btn-default btn-number" data-type="minus"
+                  data-field="quant[1]">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </button>
+              </span>
+              <input style="color: #ffffff;background-color: #000000;" id="enter_quantum" type="text" name="quant[1]" class="form-control input-number" value="2"
+                style="background-color:rgb(0, 0, 0)">
+              <span class="input-group-btn">
+                <button style="background-color: #FCBA28; color: #000000;" id="add_quantum" type="button" class="btn btn-default btn-number" data-type="plus"
+                  data-field="quant[1]">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </button>
+              </span>
+            </div>
+          </div>
+
+
+
+        </div><!-- /column -->
+
+
+        <div style="display: block; text-align: center;">
+          <p style="color: #FCBA28;">Click on the run button to show the Output Table</p>
+          <button style="background-color: #FCBA28;color: #000000;" id="runBtn" class="runButton">Run</button>
+        </div>
+
+        <div style="display: block; text-align: center;">
+          <p style="color: #FCBA28;">Click on the Reset button to run another program</p>
+          <button style="background-color: #FCBA28; color: #000000;" onclick=(location.reload()) class="runButton">Reset</button>
+        </div>
+
+        <!-- <div class="col-md-4" style="margin-top:20px;">
+
+  </div> -->
+
+        <!-- /column -->
+
+
+      </div><!-- /row -->
+
+    </div><!-- /well -->
+
+
+
+    <div class="progress" style="height:25px;margin-bottom:0px;">
+
+    </div>
+    <ul class="tick-marks ruler" id="rule2" data-items="10"></ul>
+
+
+    <hr color="#001d2c" style="margin-top: 35px;">
+
+    <!-- <div id="outputDiv"></div> -->
+
+    <h1 style="text-align: center; color: #ffffff;">Output Table</h1>
+    <hr>
+
+    <table class="table table-bordered table-condensed" id="outputTable" style="margin-bottom: 50px;">
+      <thead>
+        <tr>
+          <th style="background-color: #000000;">Process:</th>
+          <th style="background-color: #000000;">Arrival Time:</th>
+          <th style="background-color: #000000;">Burst Time:</th>
+          <!-- <th class="priority collapse">Priority:</th> -->
+          <th style="background-color: #000000;">Completion Time: </th>
+          <th style="background-color: #000000;">Turn around Time: </th>
+          <th style="background-color: #000000;">Waiting Time: </th>
+        </tr>
+      </thead>
+
+    </table>
+
+
+
+
+    <div style="color: #ffffff;" class="datavisulization">
+    <h2 style="text-align: center; margin-bottom: 40px; color: #ffffff;">Data Visaulization</h2>
+
+
+    <!-- <div class="barChart">
+      <canvas id="myBarChart"></canvas>
+    </div> -->
+
+    <hr>
+    <div class="pie" id="chartdiv">
+      <div class="first">
+        <div class="chartMenu">
+          <p style="color: #ffffff;">Waiting Time Chart</p>
+        </div>
+        <div class="chartCard">
+          <div class="chartBox">
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <!-- <canvas id="myChart"></canvas> -->
+          </div>
+        </div>
+
+
+      </div>
+      <div class="second">
+        <div class="chartMenu">
+          <p style="color: #ffffff;">Turn around Time Chart</p>
+        </div>
+        <div class="chartCard">
+          <div class="chartBox">
+            <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+            <canvas id="mytatChart" width="400" height="400"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+    <span style="font-size: large; color: #FCBA28;">CPU Utilization:
+      <div id="utilization" style="color:rgb(255, 255, 255);"></div>
+    </span>
+    <span style="font-size: large; color: #FCBA28;">Average waiting time:
+      <div id="avgwt" style="color:rgb(255, 255, 255);"></div>
+    </span>
+    <span style="font-size: large; color: #FCBA28">Average turn around time:
+      <div id="avgtat" style="color:rgb(255, 255, 255);"></div>
+    </span>
+    <div  id="advdisfcfs" style="margin: 20px;border-radius: 20px; padding: 20px; background-color: whitesmoke;">
+      <h2><b>Advantages:</b></h2>    
+      <p>
+        <ul>
+          <li>Simple and easy to implement: FCFS is a straightforward scheduling algorithm where processes are executed in the order they arrive, making it easy to understand and implement.</li>
+          <li>No starvation: Since processes are executed based on arrival time, there is no prioritization, ensuring that every process gets a chance to run.</li>
+          <li>Minimal overhead: FCFS has minimal overhead in terms of context switching or maintaining scheduling data structures, making it efficient in scenarios where the context switch cost is high.</li>
+        </ul>
+      </p>
+    <br>
+    <h2><b>Disadvantages:</b></h2>    
+      <p>
+        <ul>
+          <li>Poor response time: FCFS may lead to long waiting times for processes with higher burst times, resulting in poor response time and interactive performance.</li>  
+          <li>Convoy effect: When a long-running process holds up the CPU, shorter processes have to wait, causing a convoy effect where small processes get delayed due to the presence of a single large process.</li>
+          <li>No consideration for process priority: FCFS does not consider the priority or urgency of processes, which can be a limitation in scenarios where some processes require immediate attention or have higher priority than others.</li>
+        </ul>
+      </p>
+  </div>
+  <div  id="advdisroundrobin" style="margin: 20px;border-radius: 20px; padding: 20px; background-color: whitesmoke; display: none;">
+    <h2><b>Advantages:</b></h2>    
+    <p>
+      <ul>
+      <li>Fairness: Round Robin ensures fairness by providing equal opportunities for all processes to execute. Each process receives a fixed time slice called a time quantum, preventing any single process from monopolizing the CPU.
+  
+  
+      </li>  
+      <li>Responsiveness: Round Robin provides good responsiveness for interactive applications. Since processes are executed in a cyclic manner, even if a process with a long burst time is running, other processes get a chance to execute during subsequent time slots.</li>
+      <li>Easy Implementation: Round Robin is a simple and straightforward scheduling algorithm. It is easy to implement and understand, making it widely used in many operating systems.</li>
+  
+      </ul>
+    </p>
+  <br>
+  <h2><b>Disadvantages:</b></h2>    
+    <p>
+      <ul>
+        <li>Poor Performance for Long Processes: If a process requires a significantly longer time to complete than the time quantum, Round Robin can lead to poor performance. The overhead of frequent context switching between processes can degrade overall system performance.</li>
+        <li>Inefficiency with Unequal Processes: Round Robin treats all processes equally, regardless of their priority or resource requirements. This can result in inefficiencies when there are processes with varying resource needs or different levels of importance.</li>
+        <li>Time Quantum Selection: The selection of an appropriate time quantum is challenging. A small time quantum increases responsiveness but leads to more frequent context switching, while a large time quantum reduces context switching but may impact fairness and response time for interactive processes. Choosing an optimal time quantum is crucial for efficient Round Robin scheduling.</li>
+      </ul>
+    </p>
+  </div>
+  <div  id="advdissjf" style="margin: 20px;border-radius: 20px; padding: 20px; background-color: whitesmoke; display: none;">
+    <h2><b>Advantages:</b></h2>    
+    <p>
+      <ul>
+      <li>Minimizes Waiting Time: SJF scheduling aims to minimize the average waiting time of processes by selecting the shortest job first. This approach ensures that shorter jobs are executed earlier, reducing the time other processes have to wait.</li>
+      <li>Efficient Resource Utilization: SJF scheduling tends to utilize system resources more efficiently. Since shorter jobs are given higher priority, they can be completed quickly, freeing up system resources for other processes. This can lead to improved overall system performance.</li>
+      <li>Predictable Execution Time: In SJF scheduling, the execution time of a job is known in advance since it depends on the length of the job itself. This predictability allows for better planning and scheduling decisions, making it easier to estimate completion times and meet deadlines.
+
+      </li>
+      </ul>
+    </p>
+  <br>
+  <h2><b>Disadvantages:</b></h2>    
+    <p>
+      <ul>
+        <li>Starvation of Longer Jobs: SJF scheduling prioritizes shorter jobs, which can result in longer jobs experiencing starvation. If a series of short jobs continuously arrives, longer jobs may keep waiting indefinitely, leading to poor fairness in resource allocation.</li></ul>
+        <li>Lack of Prioritization: SJF scheduling does not consider process priority or importance, solely focusing on job length. This can be a disadvantage in scenarios where certain critical processes need to be executed first, regardless of their length, potentially impacting system performance or user experience.</li>
+        <li>Dependency on Job Length Estimation: SJF scheduling relies on accurate estimation of job lengths. If the estimated lengths are inaccurate or unreliable, it can lead to inefficient scheduling decisions. Additionally, if there are frequent changes in job lengths, it becomes challenging to estimate accurately, potentially impacting overall scheduling effectiveness.</li>
+
+    </p>
+  </div>
+  <div  id="advdispriority" style="margin: 20px;border-radius: 20px; padding: 20px; background-color: whitesmoke; display: none;">
+    <h2><b>Advantages:</b></h2>    
+    <p>
+      <ul>
+      <li>Efficient Resource Allocation: Priority CPU scheduling allows for the assignment of different priorities to processes based on their importance or urgency. This enables the CPU to allocate resources to high-priority processes first, ensuring critical tasks are completed promptly.</li>
+      <li>Priority-based Execution: With priority scheduling, higher-priority processes are given preferential treatment, allowing them to execute before lower-priority processes. This can be beneficial in scenarios where certain tasks require immediate attention or have strict deadlines.</li>
+      <li>Flexibility in Process Management: Priority scheduling offers flexibility in managing processes. Priorities can be dynamically adjusted based on changing requirements or system conditions. This adaptability ensures that the most important tasks receive the necessary resources during critical periods.
+
+      </li>
+      </ul>
+    </p>
+  <br>
+  <h2><b>Disadvantages:</b></h2>    
+    <p>
+      <ul>
+      <li>Possibility of Starvation: If processes with lower priorities are continually overshadowed by higher-priority processes, they may suffer from starvation, resulting in delayed execution or even deadlock. In extreme cases, low-priority processes may never get a chance to execute, leading to unfair resource distribution.</li> 
+      <li>Lack of Fairness: Depending on the priority assignment, priority scheduling may not provide fair resource allocation. Processes with higher priorities can monopolize system resources, causing lower-priority processes to experience longer waiting times or decreased performance.</li>
+      <li>Risk of Priority Inversion: Priority inversion can occur when a low-priority process holds a resource that a high-priority process requires. In such cases, the high-priority process is forced to wait until the low-priority process releases the resource, causing delays and potential performance degradation. Priority inheritance or priority ceiling protocols can be implemented to mitigate this risk, but they add complexity to the scheduling algorithm.
+      </li>
+      </ul>
+    </p>
+  </div>
+    <!-- <button style="background-color: #FCBA28;color: #000000;" id="explanation">Show Explanation</button> -->
+  
+
+      <!-- <div style="color: #000000;" class="explain container_docs" id="ex">
+        <h1>Algorithm Explanation</h1>
+        <p style="color: #000000; font-size: large;">User Input :</p>
+        <p id="input"></p>
+        <p id="steps"></p>
+      </div> -->
+
+  </div><!-- /containter -->
+
+
+
+
+
+
+  
+  <!-- <script src="js/new.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js"
+    integrity="sha512-R/QOHLpV1Ggq22vfDAWYOaMd5RopHrJNMxi8/lJu8Oihwi4Ho4BRFeiMiCefn9rasajKjnx9/fTQ/xkWnkDACg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="./js/cpu-scheduler.js"> </script>
+  
+
+  <script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu() {
+      navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+      navLinks.style.right = "-200px";
+    }
+
+  </script>
+
+</body>
+
+</html>

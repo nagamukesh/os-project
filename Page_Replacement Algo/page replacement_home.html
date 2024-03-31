@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html><head>
+  <title>PAGE REPLACEMENT ALGORITHM</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script><style id="plotly.js-style-global"></style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="disk.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<style>
+
+
+
+.column {
+float: left;
+padding: 15px;
+}
+
+.column1 {
+float: left;
+width: 95wv;
+padding: 15px;
+margin:10px
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+.body_name{
+background-color: #0f0f0f;
+}
+
+
+
+.button {
+background-color: #FCBA28;
+color: #0f0d0e;
+border: none;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin: 4px 2px;
+cursor: pointer;
+transition-duration: 0.5s;
+font-family: 'Outfit', sans-serif;
+font-weight: 550;
+}
+.button1 {
+background-color: #0f0d0e; 
+color: #FCBA28; 
+border-radius: 5px;
+border: 2px solid #FCBA28;
+}
+
+.button1:hover {
+background-color: #FCBA28;
+color: #0f0d0e;
+}
+nav {
+background-color: #0f0d0e;
+height: 90px;
+display:flex;
+justify-content:space-between;
+background: rgba(10, 4, 4, 0);
+position:relative;
+}
+.logo {
+border-radius: 12px;
+margin: 15px;
+margin-left: 4%;
+padding: 18px 10px 2px 10px;
+background: #231F20;
+color: #f9f4da;
+text-align: center;
+font: 20px 'Outfit', sans-serif;
+justify-content: center;
+font-weight: bolder;
+cursor: pointer;
+
+}
+.logo:hover {
+color: #FCBA28;
+}
+
+ul {
+list-style: none;
+margin-right: 4%;
+padding: 0;
+display:flex;
+justify-content:right;
+align-items: center;
+height: 100%;
+}
+
+li {
+margin: 0 20px;
+
+}
+
+a {
+color: #FCBA28;
+text-decoration: none;
+font-size: 20px;
+font-weight:bold;
+text-transform: uppercase;
+}
+
+/* dropdown*/
+.dropdown-content {
+display: none;
+position: absolute;
+min-width: 135px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+background: rgba(2, 2, 0, 0.45);
+border-radius: 5px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(10.3px);
+-webkit-backdrop-filter: blur(10.3px);
+
+}
+
+.dropdown-content a {
+color: #FCBA28;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+border: none;
+cursor: pointer;
+transition-duration: 0.25s;
+font-family: 'Outfit', sans-serif;
+font-weight: 550;
+font-size: small;
+
+}
+
+.dropdown-content a:hover {
+background-color:#FCBA28;
+color: #0f0d0e;
+border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+.fun{
+    justify-content: center;
+    text-align: center;
+}
+</style></head>
+
+<body class="body_name">
+      <!-- Navigation Bar --><nav>
+  <a class="logo" href="../index.html"> OS VISUALIZER </a>
+  <ul>
+      <li><button onclick="location.href = '../index.html';" class="button button1">Home</button></li>
+      <li class="dropdown"><button class="button button1 dropbtn">Algorithms</button>
+        <div class="dropdown-content">
+            <a href="../process_scheduling/process.html">Process Scheduling</a>
+            <a href="../process_sync\home.html">Process Synchronization</a>
+            <a href="../Bankers/bankers.html">Bankers Algorithm</a>
+            <a href="../mft_mvt/Fit.html">Fit Algorithms</a>
+            <a href="../Page_Replacement Algo/page replacement_home.html">Page Replacement Algorithm</a>
+            <a href="../Disk/disk.html">Disk Scheduling</a>
+            <a href="../file allocation/file.html">File Allocation</a>
+            <a href="../mft_mvt\MVFT.html">MFT and MVT</a>
+        </div>
+    </li>
+      <li><button class="button button1">About</button></li>
+      <li><button class="button button1">References</button></li>
+          </ul>
+          
+      
+     
+      
+</nav>
+      <br>
+      <div class="container-fluid">
+
+  
+  
+<br>
+<br>
+<div class="container-fluid">
+<div class="row">
+      <div class="jumbotron" style="background-color:#0f0f0f">
+          <h1 style="color:#FCBA28" class="display-3" font="" color="black"><strong>PAGE REPLACEMENT ALGORITHMS</strong></h1>
+          <p style="color:#FCBA28" class="lead">A Page Replacement Algorithm is a technique employed by OS to manage memory by selecting which pages to replace in the main memory when it becomes full. 
+The Primary goal is to Minimize page faults and optimize system performance. Various algorithms like FIFO, Optimal, LRU, MRU and Random are used, each with its own strategy for determining the page to evict. 
+The choice of algorithm depends on system requirements and workload characteristics.</p>
+</div>
+<div class="column1" style="background-color:#FCBA28">
+<h2 style="color:black">FIFO</h2>
+<p style="color:black">The FIFO (First-In-First-Out) page replacement algorithm is a technique used in operating systems to manage memory by replacing the oldest page in the main memory when a page fault occurs. This algorithm operates on the principle of treating the pages in memory as a queue, where the page that entered first is the one to be replaced first.</p>
+</div>
+<div class="column1" style="background-color:#FCBA28">
+<h2 style="color:black">OPTIMAL</h2>
+<p style="color:black">The Optimal algorithm works by replacing the page that will not be used for the longest period of time in the future. To determine which page to evict, it requires knowledge of the future memory access patterns, which is usually not available in practical systems. The algorithm looks ahead into the future and selects the page that will be accessed farthest in the future and replaces it.</p>
+</div>
+<div class="column1" style="background-color:#FCBA28">
+<h2 style="color:black">LRU</h2>
+<p style="color:black">The LRU (Least Recently Used) page replacement algorithm is a technique used in operating systems to manage memory by replacing the page that has been least recently accessed. It assumes that pages that have not been accessed recently are less likely to be accessed in the near future.</p>
+</div>
+<div class="column1" style="background-color:#FCBA28">
+<h2 style="color:black">MRU</h2>
+<p style="color: black">The MRU (Most Recently Used) page replacement algorithm is a technique used in operating systems to manage memory by replacing the page that has been most recently accessed. It assumes that recently used pages are more likely to be accessed again in the near future.
+</p>
+</div>
+<div class="column1" style="background-color:#FCBA28">
+<h2 style="color:black">RANDOM</h2>
+<p style="color:black">The random page replacement algorithm is a simple technique, used in operating systems to manage Memory. It involves selecting a page for replacement randomly when a page fault occurs and the main memory is full.
+</p>
+</div>
+
+
+
+</div>
+</div>
+      
+<br>
+<br>
+</div>
+<div class="fun">
+    <a href="page_replacement.html"> PAGE REPLACEMENT VISUALIZER</a>
+    <br>
+    <a href="page_replacement_comparison.html"> PAGE COMPARISION VISUALIZER</a>    
+</div>
+
+</body></html>

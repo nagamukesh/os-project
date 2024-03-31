@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<nav>
+        <a class="logo" href="../index.html"> OS VISUALIZER </a>
+        <ul>
+            <li><button class="button button1">Home</button></li>
+            <li class="dropdown"><button class="button button1 dropbtn">Algorithms</button>
+                <div class="dropdown-content">
+                    <a href="../process_scheduling/process.html">Process Scheduling</a>
+                    <a href="../process_sync\home.html">Process Synchronization</a>
+					<a href="../Bankers/bankers.html">Bankers Algorithm</a>
+                    <a href="../mft_mvt/Fit.html">Fit Algorithms</a>
+                    
+                    <a href="../Page_Replacement Algo/page replacement_home.html">Paging and Page Replacement Algorithm</a>
+                    <a href="../Disk/disk.html">Disk Scheduling</a>
+                    <a href="../file allocation/file.html">File Allocation</a>
+                    <a href="../mft_mvt\MVFT.html">MFT and MVT</a>
+                    </div>
+            </li>
+            <li><button class="button button1">About</button></li>
+            <li><button class="button button1">References</button></li>
+        </ul>   
+    </nav>
+	
+	<nav class="logo">
+	<h1>Memory Management- First Fit</h1>
+	</nav>
+	</nav>
+	
+  
+
+  <label for="block-size">Enter the size of blocks:</label>
+  <input type="number" id="block-size">
+  <button onclick="createBlock()" class="button button1 dropbtn">Create Block</button>
+
+  <div id="block-container"></div>
+
+  <p style="color: #FCBA28;">Process Allocation:</p>
+  
+  <label for="process-size">Enter the size of the process:</label>
+  <input type="number" id="process-size">
+  <button onclick="allocateProcess()" class="button button1 dropbtn">Allocate Process</button>
+
+  <div id="allocation-log"></div>
+
+  <script>
+    var memoryBlocks = [];
+
+    function createBlock() {
+      var size = document.getElementById("block-size").value;
+      var blockContainer = document.getElementById("block-container");
+      
+      var block = document.createElement("div");
+      block.className = "block";
+      block.style.width = size + "px";
+      block.style.height = "50px";
+      block.innerHTML = size;
+      
+      blockContainer.appendChild(block);
+      memoryBlocks.push({ size: parseInt(size), allocatedSize: 0, element: block });
+    }
+
+    function allocateProcess() {
+      var processSize = parseInt(document.getElementById("process-size").value);
+      var allocationLog = document.getElementById("allocation-log");
+      var allocatedBlockIndex = -1;
+
+      for (var i = 0; i < memoryBlocks.length; i++) {
+        if (memoryBlocks[i].allocatedSize + processSize <= memoryBlocks[i].size) {
+          allocatedBlockIndex = i;
+          break;
+        }
+      }
+
+      if (allocatedBlockIndex !== -1) {
+        var remainingSize = memoryBlocks[allocatedBlockIndex].size - memoryBlocks[allocatedBlockIndex].allocatedSize;
+
+        if (remainingSize === processSize) {
+          // Allocate the entire block to the process
+          memoryBlocks[allocatedBlockIndex].allocatedSize += processSize;
+
+          var allocatedBlockElement = memoryBlocks[allocatedBlockIndex].element;
+          allocatedBlockElement.style.width = memoryBlocks[allocatedBlockIndex].allocatedSize + "px";
+          allocatedBlockElement.innerHTML = memoryBlocks[allocatedBlockIndex].allocatedSize;
+          allocatedBlockElement.classList.add("allocated");
+        } else {
+          // Allocate a portion of the block to the process
+          memoryBlocks[allocatedBlockIndex].allocatedSize += processSize;
+
+          var allocatedBlockElement = memoryBlocks[allocatedBlockIndex].element;
+          allocatedBlockElement.style.width = memoryBlocks[allocatedBlockIndex].allocatedSize + "px";
+          allocatedBlockElement.innerHTML = memoryBlocks[allocatedBlockIndex].allocatedSize;
+          allocatedBlockElement.classList.add("allocated");
+
+          var remainingBlockElement = document.createElement("div");
+          remainingBlockElement.className = "block";
+          remainingBlockElement.style.width = remainingSize - processSize + "px";
+          remainingBlockElement.style.height = "50px";
+          remainingBlockElement.innerHTML = remainingSize - processSize;
+          
+          
+          var blockContainer = document.getElementById("block-container");
+          blockContainer.insertBefore(remainingBlockElement, allocatedBlockElement.nextSibling);
+
+          memoryBlocks[allocatedBlockIndex].size -= processSize;
+          memoryBlocks[allocatedBlockIndex].allocatedSize = 0;
+          memoryBlocks[allocatedBlockIndex].element = remainingBlockElement;
+        }
+	
+        allocationLog.innerHTML += "<p>Process of size " + processSize + " and allotted block is " + allocatedBlockIndex + "</p>";
+      } else {
+	  
+        allocationLog.innerHTML += "<p>No available block found to allocate process of size " + processSize + "</p>";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+<nav>
+        <a class="logo" href="../index.html"> OS VISUALIZER </a>
+        <ul>
+            <li><button class="button button1">Home</button></li>
+            <li class="dropdown"><button class="button button1 dropbtn">Algorithms</button>
+                <div class="dropdown-content">
+                    <a href="#">Process Scheduling</a>
+                    <a href="#">Process Synchronization</a>
+                    <a href="#">Deadlock Detection</a>
+                    <a href="#">MFT and MVT</a>
+                    <a href="#">Paging and Page Replacement Algorithm</a>
+                    <a href="../Disk/disk.html">Disk Scheduling</a>
+                    <a href="#">File Allocation</a>
+                    <a href="#">Miscellaneous</a>
+                    </div>
+            </li>
+            <li><button class="button button1">About</button></li>
+            <li><button class="button button1">References</button></li>
+        </ul>   
+    </nav>
+	
+	<nav class="logo">
+	<h1>Memory Management - MFT (Multiple Fixed-size Tasks)</h1>
+	</nav>
+	</nav>
+
+
+  <label for="total-memory-size">Enter the total size of memory:</label>
+  <input type="number" id="total-memory-size"><br>
+  <label for="partitions">Enter the number of partitions:</label>
+  <input type="number" id="partitions">
+  <button onclick="initializeMemory()" class="button button1 dropbtn">Initialize Memory</button>
+
+  <div id="memory-container"></div>
+
+ <p style="color: #FCBA28;">Process Allocation:</p>
+
+  <label for="process-size">Enter the size of the process:</label>
+  <input type="number" id="process-size">
+  <button onclick="allocateProcess()" class="button button1 dropbtn">Allocate Process</button>
+
+  <div id="allocation-log"></div>
+
+  <script>
+    var totalMemorySize = 0;
+    var memoryBlocks = [];
+
+    function initializeMemory() {
+      totalMemorySize = parseInt(document.getElementById("total-memory-size").value);
+	  nop= parseInt(document.getElementById("partitions").value);
+      var memoryContainer = document.getElementById("memory-container");
+      memoryContainer.innerHTML = "";
+
+      var blockSize = Math.floor(totalMemorySize / nop);
+      for (var i = 0; i < nop; i++) {
+        var memoryBlock = document.createElement("div");
+        memoryBlock.className = "memory-block";
+        memoryBlock.style.width = blockSize + "px";
+        memoryBlock.style.height = "50px";
+        memoryBlock.innerHTML = blockSize;
+        memoryBlock.dataset.allocated = "false";
+
+        memoryContainer.appendChild(memoryBlock);
+        memoryBlocks.push(memoryBlock);
+      }
+    }
+
+    function allocateProcess() {
+      var processSize = parseInt(document.getElementById("process-size").value);
+      var allocationLog = document.getElementById("allocation-log");
+      var allocated = false;
+
+      for (var i = 0; i < memoryBlocks.length; i++) {
+        if (memoryBlocks[i].dataset.allocated === "false" && parseInt(memoryBlocks[i].innerHTML) >= processSize) {
+          memoryBlocks[i].innerHTML = processSize;
+          memoryBlocks[i].classList.add("allocated");
+          memoryBlocks[i].dataset.allocated = "true";
+          allocated = true;
+          allocationLog.innerHTML += "<p>Process of size " + processSize + " allocated to block " + (i + 1) + "</p>";
+          break;
+        }
+      }
+
+      if (!allocated) {
+        allocationLog.innerHTML += "<p>No available block found to allocate process of size " + processSize + "</p>";
+      }
+    }
+  </script>
+</body>
+</html>

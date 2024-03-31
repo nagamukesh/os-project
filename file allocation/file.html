@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html><head>
+  <title>FILE ALLOCATION</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script><style id="plotly.js-style-global"></style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="disk.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<style>
+
+
+
+.column {
+float: left;
+padding: 15px;
+}
+
+.column1 {
+float: left;
+width: 95wv;
+padding: 15px;
+margin:10px
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+.body_name{
+background-color: #0f0f0f;
+}
+
+
+
+.button {
+background-color: #FCBA28;
+color: #0f0d0e;
+border: none;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+margin: 4px 2px;
+cursor: pointer;
+transition-duration: 0.5s;
+font-family: 'Outfit', sans-serif;
+font-weight: 550;
+}
+.button1 {
+background-color: #0f0d0e; 
+color: #FCBA28; 
+border-radius: 5px;
+border: 2px solid #FCBA28;
+}
+
+.button1:hover {
+background-color: #FCBA28;
+color: #0f0d0e;
+}
+nav {
+background-color: #0f0d0e;
+height: 90px;
+display:flex;
+justify-content:space-between;
+background: rgba(10, 4, 4, 0);
+position:relative;
+}
+.logo {
+border-radius: 12px;
+margin: 15px;
+margin-left: 4%;
+padding: 18px 10px 2px 10px;
+background: #231F20;
+color: #f9f4da;
+text-align: center;
+font: 20px 'Outfit', sans-serif;
+justify-content: center;
+font-weight: bolder;
+cursor: pointer;
+
+}
+.logo:hover {
+color: #FCBA28;
+}
+
+ul {
+list-style: none;
+margin-right: 4%;
+padding: 0;
+display:flex;
+justify-content:right;
+align-items: center;
+height: 100%;
+}
+
+li {
+margin: 0 20px;
+
+}
+
+a {
+color: #FCBA28;
+text-decoration: none;
+font-size: 20px;
+font-weight:bold;
+text-transform: uppercase;
+}
+
+/* dropdown*/
+.dropdown-content {
+display: none;
+position: absolute;
+min-width: 135px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+background: rgba(2, 2, 0, 0.45);
+border-radius: 5px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(10.3px);
+-webkit-backdrop-filter: blur(10.3px);
+
+}
+
+.dropdown-content a {
+color: #FCBA28;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+border: none;
+cursor: pointer;
+transition-duration: 0.25s;
+font-family: 'Outfit', sans-serif;
+font-weight: 550;
+font-size: small;
+
+}
+
+.dropdown-content a:hover {
+background-color:#FCBA28;
+color: #0f0d0e;
+border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+</style></head>
+
+<body class="body_name">
+      <!-- Navigation Bar --><nav>
+  <a class="logo" href="../index.html"> OS VISUALIZER </a>
+  <ul>
+      <li><button onclick="location.href = '../index.html';" class="button button1">Home</button></li>
+      <li class="dropdown"><button class="button button1 dropbtn">Algorithms</button>
+        <div class="dropdown-content">
+            <a href="../process_scheduling/process.html">Process Scheduling</a>
+            <a href="../process_sync\home.html">Process Synchronization</a>
+            <a href="../Bankers/bankers.html">Bankers Algorithm</a>
+            <a href="../mft_mvt/Fit.html">Fit Algorithms</a>
+            <a href="../Page_Replacement Algo/page replacement_home.html">Page Replacement Algorithm</a>
+            <a href="../Disk/disk.html">Disk Scheduling</a>
+            <a href="../file allocation/file.html">File Allocation</a>
+            <a href="../mft_mvt\MVFT.html">MFT and MVT</a>
+        </div>
+    </li>
+      <li><button class="button button1">About</button></li>
+      <li><button class="button button1">References</button></li>
+          </ul>
+          
+      
+     
+      
+</nav>
+      
+      <div class="container-fluid">
+
+  
+  
+
+
+<div class="container-fluid">
+<div class="row">
+      <div class="jumbotron" style="background-color:#0f0f0f">
+          <h1 style="color:#FCBA28" class="display-3" font="" color="black"><strong>File Allocation</strong></h1>
+          <p style="color:#FCBA28" class="lead">File allocation algorithms are used in operating systems to determine how files are stored on disk drives. These algorithms determine the most efficient way to allocate space for files, considering factors such as disk fragmentation, file size, and file access patterns.</p>
+</div>
+<div class="column1" style="background-color:#FCBA28">
+<h1 style="color:black">Contiguous Allocation</h1>
+<h5 style="color:black">In contiguous allocation, each file occupies a contiguous block of disk space.
+It is simple to implement and allows for fast sequential access to files.
+However, it suffers from external fragmentation, where free space becomes scattered across the disk, leading to inefficient space utilization.</h5>
+<h5> 
+  Advantages of Contiguous File Allocation:<br><br>
+
+Fast Sequential Access: Contiguous allocation enables fast sequential access to files. Since the blocks are stored consecutively on the disk, reading or writing data sequentially requires minimal disk head movement, reducing seek time and improving overall performance.
+
+Simplicity: Contiguous allocation is a simple and straightforward method of file storage. The file system only needs to maintain the starting block address and length of each file, making it relatively easy to implement.
+</h5>
+<br>
+<h5>
+  Disadvantages of Contiguous File Allocation:<br><br>
+
+External Fragmentation: One of the major drawbacks of contiguous allocation is external fragmentation. As files are created, modified, and deleted, free blocks become scattered across the disk. This fragmentation results in inefficient use of disk space, as even if there is enough free space, it may not be contiguous, making it difficult to allocate contiguous blocks to new files.
+
+File Growth and Compaction: Contiguous allocation poses challenges when files need to grow in size. If there is no contiguous space available immediately after the existing blocks, the file must be moved to a new location with enough contiguous space. This process, known as compaction, can be time-consuming and requires a significant number of disk I/O operations.
+</h5>
+</div>
+<div class="column1" style="background-color:#FCBA28">
+<h1 style="color:black">Linked Allocation</h1>
+<h5 style="color:black">In linked allocation, each file is represented as a linked list of blocks, where each block contains a pointer to the next block in the file.
+It eliminates external fragmentation because files can be stored in non-contiguous blocks.
+However, random access to a file becomes slower since the entire linked list needs to be traversed.</h5><br>
+<h5>
+  Advantages of Linked File Allocation:<br><br>
+
+Eliminates External Fragmentation: Linked allocation completely eliminates external fragmentation. Since files are stored as linked lists of blocks, they can be scattered across the disk without the need for contiguous space. This allows for efficient space utilization, as any available block can be used to store a file.
+
+Flexibility in File Size: Linked allocation is well-suited for systems with dynamic file sizes. Files can easily grow or shrink by adding or removing blocks from the linked list. There is no need for compaction or rearrangement of blocks when extending or reducing file sizes.
+</h5><br>
+<h5>
+  Disadvantages of Linked File Allocation:<br><br>
+
+Increased Metadata Overhead: Linked allocation requires additional metadata compared to other allocation methods. Each block needs to store a pointer to the next block, increasing the storage overhead per block. This can be a significant factor when dealing with large numbers of small files, leading to higher disk space consumption for metadata.
+
+Slower Random Access: Random access to files stored using linked allocation can be slower compared to contiguous allocation. To access a specific block, the entire linked list must be traversed from the beginning. This overhead becomes more significant for large files or when multiple random accesses are required.
+</h5>
+</div>
+
+<div class="column1" style="background-color:#FCBA28">
+  <h1 style="color:black">Indexed Allocation</h1>
+  <h5 style="color:black">a special block known as the Index block contains the pointers to all the blocks occupied by a file. Each file has its own index block. The ith entry in the index block contains the disk address of the ith file block. The directory entry contains the address of the index block </h5>
+  <h5> 
+    Advantages of Indexed File Allocation:<br><br>
+  
+    This supports direct access to the blocks occupied by the file and therefore provides fast access to the file blocks.
+    It overcomes the problem of external fragmentation.
+    
+  </h5>
+  <br>
+  <h5>
+    Disadvantages of Indexed File Allocation:<br><br>
+  
+    The pointer overhead for indexed allocation is greater than linked allocation.
+    For very small files, say files that expand only 2-3 blocks, the indexed allocation would keep one entire block (index block) for the pointers which is inefficient in terms of memory utilization. However, in linked allocation we lose the space of only 1 pointer per block.
+  </h5>
+  </div>
+
+<div class="mayur" >
+ <a href="contiguous.html">CONTIGUOUS ALLOCATION   </a>
+<br>
+<a href="linked.html">LINKED ALLOCATION</a>
+<br>
+<a href="indexed.html">INDEXED ALLOCATION</a>
+
+</div>
+
+
+</div>
+</div>
+      
+<br>
+<br>
+</div>
+<!-- Code injected by live-server -->
+<script>
+// <![CDATA[  <-- For SVG support
+if ('WebSocket' in window) {
+(function () {
+function refreshCSS() {
+  var sheets = [].slice.call(document.getElementsByTagName("link"));
+  var head = document.getElementsByTagName("head")[0];
+  for (var i = 0; i < sheets.length; ++i) {
+    var elem = sheets[i];
+    var parent = elem.parentElement || head;
+    parent.removeChild(elem);
+    var rel = elem.rel;
+    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+      var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+      elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+    }
+    parent.appendChild(elem);
+  }
+}
+var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+var address = protocol + window.location.host + window.location.pathname + '/ws';
+var socket = new WebSocket(address);
+socket.onmessage = function (msg) {
+  if (msg.data == 'reload') window.location.reload();
+  else if (msg.data == 'refreshcss') refreshCSS();
+};
+if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+  console.log('Live reload enabled.');
+  sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+}
+})();
+}
+else {
+console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+}
+// ]]>
+</script>
+
+
+</body></html>

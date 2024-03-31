@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+<br><title>Indexed Allocation</title>
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>OS Simulator</title>
+		<meta name="description" content="Nifty Modal Window Effects with CSS Transitions and Animations" />
+		<meta name="keywords" content="modal, window, overlay, modern, box, css transition, css animation, effect, 3d, perspective" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico"> 
+		<link rel="stylesheet" type="text/css" href="default.css" />
+		<link rel="stylesheet" type="text/css" href="component.css" />
+		<script src="index.custom.js"></script>
+	</head>
+
+	<body style="background-color: #fcba28;">
+
+	
+
+<center><h1 class="some" behavior="alternate" scrollamount=10>Indexed Allocation</h1></center>
+<div id="sequ">
+	<div class="visible1">
+	<p> Enter the size of memory(number of blocks)</p>
+	<input id="nof" type="number">
+	<button class="s_done" onclick="getSize()">Submit</button>
+
+	<br><br>
+
+	<div class="s_form s_hide" id="vis2">
+		<p> Please add file details </p>
+			File name:	<input  id="file_name" type="text">
+			File size(number of blocks):	<input  id="file_size" type="number">
+			<button  class="s_done" onclick="addFile()">Add</button>
+			<br>
+	</div>
+	<canvas  id="can" width="1500" height="50" col></canvas>
+	<p id = "op1"></p>
+	<p id = "op"></p>
+
+</body>
+
+<script>
+	canv = document.getElementById("can");
+	var ctx = canv.getContext("2d");
+
+	var used, next, remaining, allocations;
+	var colors = new Array(200);
+	var file_sizes = new Array(200);
+	var file_names = new Array(200);
+	var starts = new Array(200);
+	var ends = new Array(200);
+	var count = 0;
+	var point = -1;
+	var memSize;
+	var a = 0, b = 0;
+	function getSize(){
+		memSize = document.getElementById("nof").value;
+
+		if(memSize != ""){
+			vis2 = document.getElementById("vis2");
+			vis2.style.visibility = "visible";
+			vis2.classList.remove("s_hide");
+
+			used = new Array(parseInt(memSize));
+			next = new Array(parseInt(memSize));
+			remaining = parseInt(memSize);
+			allocations = new Array(parseInt(memSize));
+			for(var i = 0; i < parseInt(memSize); i++){
+				allocations[i] = -1;
+				used[i] = false;
+				next[i] = -1;
+			}
+			// console.log(next);
+			// console.log(allocations);
+		}
+		else
+			alert("Please enter valid size!");
+	}
+	
+	function addFile(){
+		if(count == 0){
+			for(var i = 0; i < memSize; i++)
+			{
+				if(Math.random() > 0.5){
+					remaining--;
+					used[i] = true;
+				}
+				next[i] = -1;
+			}
+			for(var i = 0; i < 200; i++)
+			{
+				colors[i] = color();
+				file_sizes[i] = 0;
+			 	file_names[i] = "";
+			 	starts[i] = 0;
+			 	ends[i] = 0;
+			}
+		}
+		var name = document.getElementById("file_name").value;
+		var size = document.getElementById("file_size").value;
+		size = parseInt(size);
+		var cnt = 0;
+		if(name != "" && size != "" ){
+			if(size > remaining){
+				alert("Cannot allocate!!");
+			}
+			else{
+				var prev = -1;
+				for(var i = 0; i < size; i++)
+				{
+					for(var j = 0; j < memSize; j++){
+						if(!used[j]){
+							if(prev != -1){
+								next[prev] = j;
+							}
+							if(i == 0)
+								starts[count] = j;
+							prev = j;
+							allocations[j] = count + 1;
+							used[j] = true;
+							break;
+						}
+
+					}
+				}
+				next[prev] = -1;
+				ends[count] = prev;			
+				file_names[count] = name;
+				file_sizes[count] = size;
+				count++;
+				showOutput();
+				remaining -= size;
+				console.log(allocations);
+			}
+			
+		}
+		else{
+			alert("Please enter all details!!");
+		}
+
+	}
+
+	function showOutput(){
+		var str = "";
+		var j;
+		document.getElementById("op1").innerHTML = "File______Start_____End_____Size";
+		for(var i = 0; i < count; i++){
+			str += "<br />" + file_names[i]  + "________" + starts[i] + "________" + ends[i] + "________" + file_sizes[i] + "_______";
+			//j = starts[count];
+			for(j = 0; j < memSize; j++){
+				//console.log(allocations[j], count);
+				if(parseInt(allocations[j]) == i + 1)
+				{	
+					//console.log(j);
+					str += "-->" + j;
+				}
+			}
+			//ctx.fillStyle = colors[i];
+			//ctx.fillRect(starts[i] * canv.width / memSize, 0, ends[i] * canv.width / memSize, canv.height);
+			//console.log(used, count);
+		}
+		document.getElementById("op").innerHTML = str;
+		
+	}
+
+	function color(){
+            var hex = '0123456789abcdef';
+            var col = '#';
+            for (i = 0; i < 6; i++)
+                col += hex[Math.floor(Math.random()*16)]
+            return col;
+        }
+	
+</script>
+
+</html>
