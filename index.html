@@ -3,7 +3,7 @@
 
 <head>
     <title>OS VISUALIZER</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
@@ -13,64 +13,9 @@
             margin: 0;
             padding: 0;
             font-family: 'Outfit', sans-serif;
-        }
-
-        .row{
-            display: flex;
-            flex-direction: row;
-        }
-
-        .column1{
-            margin: 25px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center horizontally */
-            justify-content: center; /* Center vertically */
-            height: 100vh; /* Full viewport height */
-            background-color: #ffffff; /* White background */
-            color: coral; /* Green text color */
-        }
-
-        nav {
-            background-color: #333; /* Change background color */
-            padding: 10px 20px;
-            color: white; /* Change text color */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .button {
-            background-color: #008CBA; /* Change button color */
-            border: none;
-            color: white; /* Change text color */
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 10em; /* Update border-radius to match other buttons */
-        }
-
-        .button:hover {
-            background-color: #005f78; /* Change hover color */
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            text-decoration: none;
-            color: white; /* Change text color */
-        }
-
-        .container-fluid {
-            padding: 20px;
+            background-color: #f8f9fa;
+            background-image: image(url("c780455026110284ea07a4e793fff651.mp4"));
+            
         }
 
         .flip-card {
@@ -101,8 +46,9 @@
             transform: rotateY(180deg);
         }
 
-        .flip-card-front, .flip-card-back {
-            box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
+        .flip-card-front,
+        .flip-card-back {
+            box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
             position: absolute;
             display: flex;
             flex-direction: column;
@@ -111,137 +57,150 @@
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border: 1px solid coral;
+            border: 1px solid #ced4da;
             border-radius: 1rem;
         }
 
         .flip-card-front {
-            background: linear-gradient(120deg, bisque 60%, rgb(255, 231, 222) 88%, rgb(255, 211, 195) 40%, rgba(255, 127, 80, 0.603) 48%);
-            color: coral;
+            background: linear-gradient(120deg, #f8f9fa 60%, #e9ecef 88%, #dee2e6 40%, #ced4da 48%);
+            color: #343a40;
         }
 
         .flip-card-back {
-            background: linear-gradient(120deg, rgb(255, 174, 145) 30%, coral 88%, bisque 40%, rgb(255, 185, 160) 78%);
-            color: white;
+            background: linear-gradient(120deg, #e9ecef 30%, #dee2e6 88%, #f8f9fa 40%, #ced4da 78%);
+            color: #343a40;
             transform: rotateY(180deg);
         }
-
+        #myVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+        }
     </style>
 </head>
 
 <body>
-    <nav>
-        <a class="logo" href="index.html"> OS VISUALIZER </a>
-        <ul>
-            <li><a class="button button1" href="index.html">Home</a></li>
-            <li><a class="button button1" href="about.html">About</a></li>
-        </ul>
+    <video autoplay muted loop id="myVideo">
+        <source src="c780455026110284ea07a4e793fff651.mp4" type="video/mp4">
+      </video>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">OS VISUALIZER</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
-    <div class="container">
-        <h1>OS VISUALIZER</h1>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="column1">
-                    <div class="flip-card" onclick="window.location.href='process_scheduling/process.html'">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="title">Process Scheduling</p>
-                                <p>FCFS,SJF,ROUND ROBIN</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="title">Process scheduling</p>
-                                <p>Mechanism through which OS selects processes to execute next from the ready queue, based on scheduling algorithms designed to optimize resource utilization.</p>
-                            </div>
+    <div class="container my-5">
+        <h1 class="text-center">OS VISUALIZER</h1>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="flip-card" onclick="window.location.href='process_scheduling/process.html'">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">Process Scheduling</p>
+                            <p>FCFS,SJF,ROUND ROBIN</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p class="title">Process scheduling</p>
+                            <p>Mechanism through which OS selects processes to execute next from the ready queue, based on scheduling algorithms designed to optimize resource utilization.</p>
                         </div>
                     </div>
                 </div>
-                <div class="column1">
-                    <div class="flip-card" onclick="window.location.href='process_sync\home.html'">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="title">Process Synchronization</p>
-                                <p>Hover Me</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="title">BACK</p>
-                                <p>Leave Me</p>
-                            </div>
+            </div>
+            <div class="col-md-3">
+                <div class="flip-card" onclick="window.location.href='process_sync\home.html'">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">Process Synchronization</p>
+                            <p>Hover Me</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p class="title">BACK</p>
+                            <p>Leave Me</p>
                         </div>
                     </div>
                 </div>
-                <div class="column1">
-                    <div class="flip-card" onclick="window.location.href='Bankers/bankers.html'">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="title">Bankers Algorithm</p>
-                                <p>Hover Me</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="title">BACK</p>
-                                <p>Leave Me</p>
-                            </div>
+            </div>
+            <div class="col-md-3">
+                <div class="flip-card" onclick="window.location.href='Bankers/bankers.html'">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">Bankers Algorithm</p>
+                            <p>Hover Me</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p class="title">BACK</p>
+                            <p>Leave Me</p>
                         </div>
                     </div>
                 </div>
-                <div class="column1">
-                    <div class="flip-card" onclick="window.location.href='mft_mvt/Fit.html'">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="title">Fit Algorithms</p>
-                                <p>Hover Me</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="title">BACK</p>
-                                <p>Leave Me</p>
-                            </div>
+            </div>
+            <div class="col-md-3">
+                <div class="flip-card" onclick="window.location.href='mft_mvt/Fit.html'">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">Fit Algorithms</p>
+                            <p>Hover Me</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p class="title">BACK</p>
+                            <p>Leave Me</p>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Add more columns here -->
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="column1">
-                    <div class="flip-card" onclick="window.location.href='Page_Replacement Algo/page replacement_home.html'">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="title">Page Replacement Algorithm</p>
-                                <p>Hover Me</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="title">BACK</p>
-                                <p>Leave Me</p>
-                            </div>
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="flip-card" onclick="window.location.href='Page_Replacement Algo/page replacement_home.html'">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">Page Replacement Algorithm</p>
+                            <p>Hover Me</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p class="title">BACK</p>
+                            <p>Leave Me</p>
                         </div>
                     </div>
                 </div>
-                <div class="column1">
-                    <div class="flip-card" onclick="window.location.href='Disk/disk.html'">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="title">Disk Scheduling</p>
-                                <p>Hover Me</p>
-                            </div>
-                            <div class="flip-card-back">
-                                <p class="title">BACK</p>
-                                <p>Leave Me</p>
-                            </div>
+            </div>
+            <div class="col-md-3">
+                <div class="flip-card" onclick="window.location.href='Disk/disk.html'">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">Disk Scheduling</p>
+                            <p>Hover Me</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p class="title">BACK</p>
+                            <p>Leave Me</p>
                         </div>
                     </div>
                 </div>
-                <div class="column1">
-                    <div class="flip-card" onclick="window.location.href='file allocation/file.html'">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <p class="title">File Allocation</p>
+            </div>
+            <div class="col-md-3">
+                <div class="flip-card" onclick="window.location.href='file allocation/file.html'">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">File Allocation</p>
                                 <p>Hover Me</p>
                             </div>
                             <div class="flip-card-back">
                                 <p class="title">BACK</p>
-                                <p>Leave Me</p>
+                                <p class="back">Leave Me</p>
                             </div>
                         </div>
                     </div>
@@ -255,7 +214,7 @@
                             </div>
                             <div class="flip-card-back">
                                 <p class="title">BACK</p>
-                                <p>Leave Me</p>
+                                <p class="back">Leave Me</p>
                             </div>
                         </div>
                     </div>
