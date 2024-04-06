@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Priority Pre-emptive Theory
+  </title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-warning btn-lg btn-radius dropdown-toggle" style="color: white; background-color: black;" data-bs-toggle="dropdown">Classical Problems</button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="fcfs.html">First Come First Serve</a></li>
+              <li><a class="dropdown-item" href="SJF Non-Preemptive.html">Shortest Job First</a></li>
+              <li><a class="dropdown-item" href="srtf.html">Shortest Remaining Time First</a></li>
+              <li><a class="dropdown-item" href="longest_job_first.html">Longest Job First</a></li>
+              <li><a class="dropdown-item" href="Largest Remaining Time first.html">Largest Remaining Time First</a></li>
+              <li><a class="dropdown-item" href="Priority Preemptive.html">Priority Preemptive</a></li>
+              <li><a class="dropdown-item" href="prioritynonpre.html">Priority Non Preemptive</a></li>
+              <li><a class="dropdown-item" href="compare.html">Compare Algorithms</a></li>
+              <li><a class="dropdown-item" href="round-robin.html">Round Robin</a></li>
+              <li><a class="dropdown-item" href="hrrn.html">Highest Response Ratio Next</a></li>
+
+            </ul>
+          </div>
+      </li>
+        
+            </ul>
+          </div>
+        </div>
+      </li>
+      </ul>
+    <button type="button" class="btn btn-outline-success btn-lg btn-radius" 
+    onclick="window.location.href = '../index.html';" style="color: rgb(255, 255, 255); background-color:  black;"> 
+      Back to Home
+      </button>  
+    </div>
+  </div>
+  </nav>
+<br><br><br>
+
+
+
+<body>
+    <div class="container">
+      <br><br><br><br>
+      <h1>
+        <b>Priority Scheduling</b>
+      </h1>
+      <h4>(Pre-emptive)</h4>
+      <br><br>
+      <p>
+        In Priority scheduling, there is a priority number assigned to each process. In some systems, the lower the number, the higher the priority. While, in the others, the higher the number, the higher will be the priority. The Process with the higher priority among the available processes is given the CPU. There are two types of priority scheduling algorithm exists. One is Preemptive priority scheduling while the other is Non Preemptive Priority scheduling.
+      </p>
+      
+        
+      
+      <p>
+        The priority number assigned to each of the process may or may not vary. If the priority number doesn't change itself throughout the process, it is called static priority, while if it keeps changing itself at the regular intervals, it is called dynamic priority.
+      </p>
+      <p>In the <b>Non Preemptive Priority scheduling</b>, The Processes are scheduled according to the priority number assigned to them. Once the process gets scheduled, it will run till the completion. </p>
+      <p>
+      
+        In <b>Preemptive Priority Scheduling</b>, at the time of arrival of a process in the ready queue, its Priority is compared with the priority of the other processes present in the ready queue as well as with the one which is being executed by the CPU at that point of time. The One with the highest priority among all the available processes will be given the CPU next.
+      </p>
+      
+      <p>The difference between preemptive priority scheduling and non preemptive priority scheduling is that, in the preemptive priority scheduling, the job which is being executed can be stopped at the arrival of a higher priority job.</p>
+     <p>Once all the jobs get available in the ready queue, the algorithm will behave as non-preemptive priority scheduling, which means the job scheduled will run till the completion and no preemption will be done</p>
+    <br>
+    <br>
+     <p>Checkout the simulation of Priority Preemptive</p>
+      <br>
+      <a href="Priority Preemptive.html" type="button" class="btn btn-outline-secondary">Click here for simulation</a>
+    </div>
+</body>
+</html>

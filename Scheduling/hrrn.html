@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+ Highest Response Ratio Next Scheduling
+  </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+</head>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-warning btn-lg btn-radius dropdown-toggle" style="color: white; background-color: black;" data-bs-toggle="dropdown">Classical Problems</button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="fcfs.html">First Come First Serve</a></li>
+              <li><a class="dropdown-item" href="SJF Non-Preemptive.html">Shortest Job First</a></li>
+              <li><a class="dropdown-item" href="srtf.html">Shortest Remaining Time First</a></li>
+              <li><a class="dropdown-item" href="longest_job_first.html">Longest Job First</a></li>
+              <li><a class="dropdown-item" href="Largest Remaining Time first.html">Largest Remaining Time First</a></li>
+              <li><a class="dropdown-item" href="Priority Preemptive.html">Priority Preemptive</a></li>
+              <li><a class="dropdown-item" href="prioritynonpre.html">Priority Non Preemptive</a></li>
+              <li><a class="dropdown-item" href="compare.html">Compare Algorithms</a></li>
+              <li><a class="dropdown-item" href="round-robin.html">Round Robin</a></li>
+              <li><a class="dropdown-item" href="hrrn.html">Highest Response Ratio Next</a></li>
+
+            </ul>
+          </div>
+      </li>
+        
+            </ul>
+          </div>
+        </div>
+      </li>
+      </ul>
+    <button type="button" class="btn btn-outline-success btn-lg btn-radius" 
+    onclick="window.location.href = '../index.html';" style="color: rgb(255, 255, 255); background-color:  black;"> 
+      Back to Home
+      </button>  
+    </div>
+  </div>
+  </nav>
+<br><br><br>
+
+<script>
+  /*FCFS SCHEDULING*/
+
+var sequence=[];
+var complete;
+var time;
+var i;
+var total;
+var proc;
+var n;
+var average_wt=0;
+var average_tat=0;
+var stuff=[];
+var index=1;
+var throughput;
+var cpu_efficiency;
+$(document).ready(function(){
+  $('#add').click(function(){
+    AddtoList();
+  })
+  function DisplayList(){
+    var table = document.getElementById("ept");
+    console.log(stuff[stuff.length-1].no);
+    $('#ept').append("<tr><td>"+stuff[stuff.length-1].no+"</td><td>"+stuff[stuff.length-1].at+"</td><td>"+stuff[stuff.length-1].bt+"</td></tr>");
+  }
+  function AddtoList(){
+    var arrivalTime=parseInt(document.getElementById("at").value);
+    var burstTime=parseInt(document.getElementById("bt").value);
+    console.log(arrivalTime);
+    console.log(burstTime);
+    var rtj=[];
+    rtj.push(burstTime);
+    console.log(rtj);
+    stuff.push({
+      "at":arrivalTime,
+      "bt":burstTime,
+      "finish" : parseInt("0"),
+      "no":index,
+      "rt":rtj,
+      "wt":parseInt("0"),
+      "tat":parseInt("0")
+    });
+    index=index+1;
+    document.getElementById("at").value="";
+    document.getElementById("bt").value="";
+    DisplayList();
+  };
+  $('#start').click(function(){
+    hrrn();
+    var i = 0;
+  console.log(total);
+   console.log(sequence[total].start);
+    var totalTime = sequence[total].start;
+    pixel = parseInt(800/totalTime);
+    console.log("%d---%d\n",totalTime,pixel);
+    var containerWidth = pixel*totalTime + 2;
+    console.log("containerWidth is %d",containerWidth);
+    $('#outer-div').css('width',containerWidth+'px');
+    displayBlock(i);
+  })
+  var Q=[];
+  function hrrn(){
+    var proc=[];
+    for(i=0;i<stuff.length;i++){
+      proc.push(i+1);
+    }
+    var n=stuff.length;
+    for(i=0;i<n;i++){
+      for(j=i+1;j<n;j++){
+        if(stuff[i].at>stuff[j].at)
+        {
+          var temp;
+          temp=stuff[i];
+          stuff[i]=stuff[j];
+          stuff[j]=temp;
+          temp=proc[i];
+          proc[i]=proc[j];
+          proc[j]=temp;
+        }
+      }
+    }
+    n=stuff.length;
+    console.log(stuff);
+    var time=0;
+    var complete=0;
+    var temp=null;
+    var st_time;
+    sequence=[];
+    if(stuff[0].at>0)
+    {
+      console.log("Arrival time of the first process is not zero!");
+      sequence.push({start:0 , n:null});
+      time+=stuff[0].at;
+    }
+    while(complete!=n)
+    {
+      var hrr=-999;
+      var loc;
+      for(i=0;i<n;i++)
+      {
+        if(stuff[i].finish!=1)
+        {
+          temp=(stuff[i].bt+time-stuff[i].at)/stuff[i].bt;
+          if(hrr<temp)
+          {
+            hrr=temp;
+            loc=i;
+          }
+        }
+      }
+      if(hrr!=-999)
+      {
+        complete++;
+        sequence.push({start:time,n:proc[loc]});
+        stuff[loc].finish=1;
+        time+=stuff[loc].bt;
+        stuff[loc].tat=time-stuff[loc].at;
+        stuff[loc].wt=stuff[loc].tat-stuff[loc].bt;
+
+      }
+    }
+    sequence.push({start:time,n:-1});
+    console.log(sequence);
+    console.log(stuff);
+    total = sequence.length-1;
+    console.log(total);
+    var sum_at=0;
+    for(i=0;i<n;i++)
+      sum_at+=stuff[i].wt;
+    average_wt=sum_at/n;
+    var pixel = 0;
+    var sum_null=0;
+    var sum_tat=0;
+    for(i=0;i<n;i++)
+      sum_tat+=stuff[i].tat;
+    average_tat=sum_tat/n;
+    throughput=n/time;
+    for(i=0;i<sequence.length;i++)
+    {
+      if(sequence[i].n==null)
+      {
+        sum_null+=sequence[i+1].start-sequence[i].start;
+      }
+    }
+    cpu_efficiency=((time-sum_null)/time)*100;
+  }
+
+
+  function drawTable(i){
+    if(i<stuff.length){
+    var table = document.getElementById("ptable");
+    console.log(stuff[i].wt);
+    $("#ptable").append("<tr><td>"+stuff[i].no+"</td><td>"+stuff[i].at+"</td><td>"+stuff[i].bt+"</td><td>"+stuff[i].wt+"</td><td>"+stuff[i].tat+"</td></tr>");
+    drawTable(i+1);
+  }
+  else
+  {
+    $("#Average").append("<b>The average waiting time of the given processes is "+average_wt+"</b><br>");
+    $("#Average").append("<b>The average turn around time of the given processes is "+average_tat+"</b><br>");
+    $("#Average").append("<b>The throughput of the given processes is "+throughput+"</b><br>");
+    $("#Average").append("<b>The CPU efficiency is "+cpu_efficiency+"%</b><br>");
+  }
+
+}
+
+  function displayBlock(i){
+    if(i == total){
+      document.getElementById("ptab").style.display='block';
+      drawTable(0);
+      return;
+    }
+
+    var blockWidth = (sequence[i+1].start - sequence[i].start)*pixel;
+    var processName = sequence[i].n;
+    if(sequence[i].n==null)
+    {
+      $('#outer-div').append('<div class="block" id="process-'+sequence[i].start +'">CPU Idle<div class="bottom">'+ sequence[i+1].start +'</div></div>');
+    }
+    else
+    {
+      $('#outer-div').append('<div class="block" id="process-'+sequence[i].start +'">P-'+ sequence[i].n +'<div class="bottom">'+ sequence[i+1].start +'</div></div>');
+    }
+    $('#process-'+sequence[i].start).css('width',blockWidth);
+
+    $('#process-'+sequence[i].start).fadeIn('slow',function(){
+      displayBlock(i+1);
+    });
+
+  }
+});
+</script>
+
+<body>
+  <h1>
+    Highest Response Ratio Next  algorithm for process Scheduling
+  
+  </h1>
+  <h2>
+    Simulation
+  </h2>
+  <p>
+    We suggest our users to go through theory related to the topic before running the simulation .
+    <br> to read the theory , click on the button below .
+  </p>
+  
+  <button  id="next" class="btn" class="active"> <a href="hrrndetails.html"> know more </a></button>
+  <br>
+  <br>
+  <h1>
+    Highest Response Ratio Next Scheduling
+  </h1>
+  <h2>
+    Gantt Chart
+  </h2>
+  <br>
+  <div>
+      <h3>Entered Processes:</h3>
+    <table id="ep" class="table table-bordered" style="width:500px">
+      <thead>
+      <th>PNO.</th>
+      <th>Arrival Time </th>
+      <th>Burst Time</th>
+    </tr>
+    <tbody id="ept">
+    </tbody>
+  </thead>
+</table>
+  </div>
+  <input type='number' min="0" id='at' placeholder="arrival time"></input>
+  <input type='number' min="0" id='bt' placeholder="burst time"></input>
+  <button id="add" class="btn" onclick="AddtoList()">Add</button>
+  <br><br>
+  <button id="start" class="btn">Start</button>
+  <br>
+  <br>
+  <div id="outer-div">
+  </div>
+  <br><br><br>
+  <div class="panel-content">
+  <table id="ptab" class="table table-bordered" style="width:408px">
+  <thead>
+  <tr id="thead">
+  <th>PNO.</th>
+  <th>Arrival time</th>
+  <th>Burst time</th>
+  <th>Waiting time</th>
+  <th>Turn around time</th>
+  </tr>
+  <tbody id="ptable">
+
+  </tbody>
+  </thead>
+  </table>
+    </div>
+    <p id="Average"></p>
+</body>
+</html>

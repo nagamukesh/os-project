@@ -16,8 +16,27 @@
     body {
       font-family: Arial, sans-serif;
       background: #0f0d0e;/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      color: #FCBA28;
+      color: violet;
     }
+
+    button {
+  font-family: monospace;
+  font-size: 1.5rem;
+  color: #FAFAFA;
+  text-transform: uppercase;
+  padding: 10px 10px;
+  border-radius: 10px;
+  border: 2px solid #FAFAFA;
+  background: #1E1B77;
+  box-shadow: 3px 3px #fafafa;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+button:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
 
     h1 {
       text-align: center;
@@ -43,7 +62,7 @@
     }
 
     .success {
-      color: #FCBA28;
+      color: violet;
       font-weight:400;
       margin-top: 10px;
       text-align: center;
@@ -64,13 +83,13 @@
     }
 
     body {
-      background-color: #0f0d0e;
+      background-color: #1E1B77;
       font-family: 'Outfit', sans-serif;
       font-size: x-large;
     }
     .button {
-        background-color: #FCBA28;
-        color: #0f0d0e;
+        background-color: white;
+        color: #1E1B77;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -83,14 +102,14 @@
         font-weight: 550;
       }
     .button1 {
-        background-color: #0f0d0e; 
-        color: #FCBA28; 
+        background-color: #1E1B77; 
+        color: white; 
         border-radius: 5px;
-        border: 2px solid #FCBA28;
+        border: 2px solid white;
       }
     
     .button1:hover {
-       background-color: #FCBA28;
+       background-color: violet;
        color: #0f0d0e;
     }
     nav {
@@ -100,23 +119,6 @@
       justify-content:space-between;
       background: rgba(10, 4, 4, 0);
       position:relative;
-    }
-    .logo {
-      border-radius: 12px;
-      margin: 15px;
-      margin-left: 4%;
-      padding: 18px 10px 2px 10px;
-      background: #231F20;
-      color: #f9f4da;
-      text-align: center;
-      font: 20px 'Outfit', sans-serif;
-      justify-content: center;
-      font-weight: bolder;
-      cursor: pointer;
-      
-    }
-    .logo:hover {
-      color: #FCBA28;
     }
       
     ul {
@@ -135,7 +137,7 @@
     }
     
     a {
-      color: #FCBA28;
+      color: violet;
       text-decoration: none;
       font-size: 20px;
       font-weight:bold;
@@ -169,9 +171,26 @@
       -webkit-backdrop-filter: blur(10.3px);
       
     }
-    
+    .input-container{
+  background-color: #1E1B77;
+  height: 70px;
+  padding: 10px;
+  /* text-align: center; */
+  border: 2px solid white;
+  border-radius: 5px;
+  /* box-shadow: 3px 3px 2px rgb(249, 255, 85); */
+}
+
+.input-container:focus {
+  color: rgb(0, 255, 255);
+  background-color: #1E1B77;
+  outline-color: rgb(0, 255, 255);
+  box-shadow: -3px -3px 15px rgb(0, 255, 255);
+  transition: .1s;
+  transition-property: box-shadow;
+}
     .dropdown-content a {
-      color: #FCBA28;
+      color: violet;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
@@ -185,7 +204,7 @@
     }
     
     .dropdown-content a:hover {
-      background-color:#FCBA28;
+      background-color:violet;
       color: #0f0d0e;
       border-radius: 5px;
     }
@@ -203,187 +222,188 @@
   </style>
 </head>
 <body>
-  <nav>
-    <a class="logo" href="../index.html"> OS VISUALIZER </a>
-    <ul>
-        <li><button onclick="location.href = '../index.html';" class="button button1">Home</button></li>
-        <li class="dropdown"><button class="button button1 dropbtn">Algorithms</button>
-          <div class="dropdown-content">
-              <a href="../process_scheduling/process.html">Process Scheduling</a>
-              <a href="../process_sync\home.html">Process Synchronization</a>
-              <a href="../Bankers/bankers.html">Bankers Algorithm</a>
-              <a href="../mft_mvt/Fit.html">Fit Algorithms</a>
-              <a href="../Page_Replacement Algo/page replacement_home.html">Page Replacement Algorithm</a>
-              <a href="../Disk/disk.html">Disk Scheduling</a>
-              <a href="../file allocation/file.html">File Allocation</a>
-              <a href="../mft_mvt\MVFT.html">MFT and MVT</a>
+  <div class="total">
+    <nav>
+      <ul>
+          <li><button onclick="location.href = '../index.html';" class="button button1">Home</button></li>
+          <li class="dropdown"><button class="button button1 dropbtn">Algorithms</button>
+            <div class="dropdown-content">
+                <a href="../process_scheduling/process.html">Process Scheduling</a>
+                <a href="../process_sync\home.html">Process Synchronization</a>
+                <a href="../Bankers/bankers.html">Bankers Algorithm</a>
+                <a href="../mft_mvt/Fit.html">Fit Algorithms</a>
+                <a href="../Page_Replacement Algo/page replacement_home.html">Page Replacement Algorithm</a>
+                <a href="../Disk/disk.html">Disk Scheduling</a>
+                <a href="../file allocation/file.html">File Allocation</a>
+                <a href="../mft_mvt\MVFT.html">MFT and MVT</a>
+            </div>
+        </li>
+          <li><button class="button button1">About</button></li>
+          <li><button class="button button1">References</button></li>
+              </ul>
+              </ul>
           </div>
-      </li>
-        <li><button class="button button1">About</button></li>
-        <li><button class="button button1">References</button></li>
-            </ul>
-            </ul>
-        </div>
-    </ul>   
-        </div>
-</nav>
-  <h1>Banker's Algorithm Simulator</h1>
-
-  <div class="input-container">
-    <label for="resources">Available Resources:</label>
-    <input type="text" id="resources" placeholder="e.g., 10 5 7">
-  </div>
-
-  <table id="max-allocations">
-    <caption>Maximum Resource Allocation</caption>
-    <thead>
-      <tr>
-        <th>Process</th>
-        <th>Resource 1</th>
-        <th>Resource 2</th>
-        <th>Resource 3</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>P0</td>
-        <td><input type="number" min="0"></td>
-        <td><input type="number" min="0"></td>
-        <td><input type="number" min="0"></td>
-      </tr>
-      <tr>
-        <td>P1</td>
-        <td><input type="number" min="0"></td>
-        <td><input type="number" min="0"></td>
-        <td><input type="number" min="0"></td>
-      </tr>
-      <!-- Add more rows for additional processes -->
-    </tbody>
-  </table>
-
-  <div class="input-container">
-    <label for="request-process">Request Resource for Process:</label>
-    <select id="request-process">
-      <option value="P0">P0</option>
-      <option value="P1">P1</option>
-      <!-- Add more options for additional processes -->
-    </select>
-  </div>
-
-  <div class="input-container">
-    <label for="request">Resource Request:</label>
-    <input type="text" id="request" placeholder="e.g., 3 2 4">
-  </div>
-
-  <button id="simulate-button">Simulate</button>
-
-  <div id="output"></div>
-
-  <script>
-    // Banker's Algorithm Simulation
-    document.getElementById('simulate-button').addEventListener('click', simulate);
-
-    function simulate() {
-      const resourcesInput = document.getElementById('resources');
-      const maxAllocationRows = document.querySelectorAll('#max-allocations tbody tr');
-      const requestProcess = document.getElementById('request-process').value;
-      const requestInput = document.getElementById('request');
-
-      const available = resourcesInput.value.split(' ').map(Number);
-      const maxAllocations = Array.from(maxAllocationRows, row =>
-        Array.from(row.querySelectorAll('input[type="number"]'), input => Number(input.value))
-      );
-      const request = requestInput.value.split(' ').map(Number);
-
-      if (available.length !== maxAllocations[0].length || available.length !== request.length) {
-        showError('Invalid input! Please provide valid values.');
-        return;
-      }
-
-      if (!isValidState(available, maxAllocations)) {
-        showError('Invalid input! Maximum allocation exceeds available resources.');
-        return;
-      }
-
-      if (!isSafeState(available, maxAllocations, requestProcess, request)) {
-        showError('Unsafe state! The resource request cannot be granted.');
-        return;
-      }
-
-      showSuccess('Safe state! The resource request can be granted.');
-    }
-
-    function isValidState(available, maxAllocations) {
-      for (let i = 0; i < available.length; i++) {
-        let totalAllocation = 0;
-        for (let j = 0; j < maxAllocations.length; j++) {
-          totalAllocation += maxAllocations[j][i];
+      </ul>   
+          </div>
+  </nav>
+    <h1>Banker's Algorithm Simulator</h1>
+  
+    <div class="input-container">
+      <label for="resources">Available Resources:</label>
+      <input type="text" id="resources" placeholder="e.g., 10 5 7">
+    </div>
+  
+    <table id="max-allocations">
+      <caption>Maximum Resource Allocation</caption>
+      <thead>
+        <tr>
+          <th>Process</th>
+          <th>Resource 1</th>
+          <th>Resource 2</th>
+          <th>Resource 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>P0</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <tr>
+          <td>P1</td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+          <td><input type="number" min="0"></td>
+        </tr>
+        <!-- Add more rows for additional processes -->
+      </tbody>
+    </table>
+  
+    <div class="input-container">
+      <label for="request-process">Request Resource for Process:</label>
+      <select id="request-process">
+        <option value="P0">P0</option>
+        <option value="P1">P1</option>
+        <!-- Add more options for additional processes -->
+      </select>
+    </div>
+  
+    <div class="input-container">
+      <label for="request">Resource Request:</label>
+      <input type="text" id="request" placeholder="e.g., 3 2 4">
+    </div>
+  
+    <button id="simulate-button">Simulate</button>
+  
+    <div id="output"></div>
+  
+    <script>
+      // Banker's Algorithm Simulation
+      document.getElementById('simulate-button').addEventListener('click', simulate);
+  
+      function simulate() {
+        const resourcesInput = document.getElementById('resources');
+        const maxAllocationRows = document.querySelectorAll('#max-allocations tbody tr');
+        const requestProcess = document.getElementById('request-process').value;
+        const requestInput = document.getElementById('request');
+  
+        const available = resourcesInput.value.split(' ').map(Number);
+        const maxAllocations = Array.from(maxAllocationRows, row =>
+          Array.from(row.querySelectorAll('input[type="number"]'), input => Number(input.value))
+        );
+        const request = requestInput.value.split(' ').map(Number);
+  
+        if (available.length !== maxAllocations[0].length || available.length !== request.length) {
+          showError('Invalid input! Please provide valid values.');
+          return;
         }
-        if (totalAllocation > available[i]) {
-          return false;
+  
+        if (!isValidState(available, maxAllocations)) {
+          showError('Invalid input! Maximum allocation exceeds available resources.');
+          return;
         }
-      }
-      return true;
-    }
-
-    function isSafeState(available, maxAllocations, requestProcess, request) {
-      const work = available.slice();
-      const allocation = maxAllocations.map(row => row.slice());
-      const requestIndex = parseInt(requestProcess.slice(1));
-
-      for (let i = 0; i < work.length; i++) {
-        if (request[i] > work[i]) {
-          return false;
+  
+        if (!isSafeState(available, maxAllocations, requestProcess, request)) {
+          showError('Unsafe state! The resource request cannot be granted.');
+          return;
         }
+  
+        showSuccess('Safe state! The resource request can be granted.');
       }
-
-      work.forEach((value, index) => {
-        work[index] -= request[index];
-        allocation[requestIndex][index] += request[index];
-      });
-
-      const finish = Array(maxAllocations.length).fill(false);
-      let count = 0;
-
-      while (count < maxAllocations.length) {
-        let found = false;
-        for (let i = 0; i < maxAllocations.length; i++) {
-          if (!finish[i]) {
-            let j;
-            for (j = 0; j < work.length; j++) {
-              if (allocation[i][j] > work[j]) {
-                break;
-              }
-            }
-            if (j === work.length) {
-              finish[i] = true;
-              found = true;
-              count++;
-              work.forEach((value, index) => {
-                work[index] += maxAllocations[i][index];
-              });
-            }
+  
+      function isValidState(available, maxAllocations) {
+        for (let i = 0; i < available.length; i++) {
+          let totalAllocation = 0;
+          for (let j = 0; j < maxAllocations.length; j++) {
+            totalAllocation += maxAllocations[j][i];
+          }
+          if (totalAllocation > available[i]) {
+            return false;
           }
         }
-        if (!found) {
-          break;
-        }
+        return true;
       }
-
-      return count === maxAllocations.length;
-    }
-
-    function showError(message) {
-      const output = document.getElementById('output');
-      output.textContent = message;
-      output.className = 'error';
-    }
-
-    function showSuccess(message) {
-      const output = document.getElementById('output');
-      output.textContent = message;
-      output.className = 'success';
-    }
-  </script>
+  
+      function isSafeState(available, maxAllocations, requestProcess, request) {
+        const work = available.slice();
+        const allocation = maxAllocations.map(row => row.slice());
+        const requestIndex = parseInt(requestProcess.slice(1));
+  
+        for (let i = 0; i < work.length; i++) {
+          if (request[i] > work[i]) {
+            return false;
+          }
+        }
+  
+        work.forEach((value, index) => {
+          work[index] -= request[index];
+          allocation[requestIndex][index] += request[index];
+        });
+  
+        const finish = Array(maxAllocations.length).fill(false);
+        let count = 0;
+  
+        while (count < maxAllocations.length) {
+          let found = false;
+          for (let i = 0; i < maxAllocations.length; i++) {
+            if (!finish[i]) {
+              let j;
+              for (j = 0; j < work.length; j++) {
+                if (allocation[i][j] > work[j]) {
+                  break;
+                }
+              }
+              if (j === work.length) {
+                finish[i] = true;
+                found = true;
+                count++;
+                work.forEach((value, index) => {
+                  work[index] += maxAllocations[i][index];
+                });
+              }
+            }
+          }
+          if (!found) {
+            break;
+          }
+        }
+  
+        return count === maxAllocations.length;
+      }
+  
+      function showError(message) {
+        const output = document.getElementById('output');
+        output.textContent = message;
+        output.className = 'error';
+      }
+  
+      function showSuccess(message) {
+        const output = document.getElementById('output');
+        output.textContent = message;
+        output.className = 'success';
+      }
+    </script>
+  </div>
 </body>
 </html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Process Synchronization</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  
+  <h1>Process Synchronization</h1>
+
+  <div class="div"><h2>Producer-Consumer Problem</h2>
+    <p>
+    The producer-consumer problem is a classic synchronization problem in computer science that illustrates the challenges of coordinating interactions between two concurrent processes. It involves a producer, responsible for producing data items, and a consumer, tasked with consuming those items. 
+    These processes often share a common buffer or queue, which acts as an intermediary storage space. One of the main challenges in solving the producer-consumer problem is achieving the right balance between the producer's rate of production and the consumer's rate of consumption. If the producer produces items too quickly, it may overwhelm the buffer or cause data loss. On the other hand, if the consumer consumes items too slowly, the buffer may overflow, leading to wasted resources or a potential deadlock.Synchronization mechanisms such as locks, semaphores, or condition variables are typically employed to control access to the shared buffer and coordinate the actions of the producer and consumer. These mechanisms ensure that the producer and consumer do not interfere with each other's operations, preserving the integrity of the data and avoiding conflicts.
+  </p>
+    <button onclick="location.href='producerConsumer/pc.html'">Simulate</button></div>
+
+  <div class="div"><h2>Readers-Writers Problem</h2>
+    <p>The readers-writers problem is a classic synchronization problem in computer science that deals with managing access to a shared resource, such as a file or a database, by multiple readers and writers. The problem arises when there are concurrent processes that need to access the shared resource, and different synchronization requirements exist for readers and writers. In the readers-writers problem, multiple readers can simultaneously access the shared resource for reading without causing conflicts. However, only one writer should be allowed to access the resource exclusively for writing, preventing concurrent writes that could lead to data inconsistency or corruption. The challenge lies in designing a solution that allows efficient concurrent reading while ensuring exclusive access for writing when necessary. The solution needs to strike a balance between maximizing resource utilization and maintaining data integrity. Various synchronization mechanisms, such as locks, semaphores, or condition variables, can be used to implement different strategies to address the readers-writers problem. These mechanisms ensure that conflicts between readers and writers are properly managed and access to the shared resource is coordinated.
+    </p>
+    <button onclick="location.href='readerWriter/rw.html'">Simulate</button></div>
+
+  <div class="div"><h2>Dining Philosophers Problem</h2>
+    <p>The dining philosophers problem is a classic synchronization problem in computer science that explores the challenges of resource allocation and deadlock avoidance in a concurrent system. The problem involves a group of philosophers seated around a circular table, each with a plate of food and a fork placed between them. The philosophers alternate between two activities: thinking and eating. To eat, a philosopher must acquire two adjacent forks. However, there are only as many forks as there are philosophers, leading to potential contention for resources. The challenge arises when all philosophers simultaneously pick up their left fork, resulting in a circular wait condition where each philosopher waits for their right fork to become available. This situation leads to a deadlock, where no philosopher can proceed with eating, and resources are effectively blocked. Solving the dining philosophers problem requires designing a strategy to prevent deadlock while ensuring fair access to resources. Various approaches exist, such as using resource hierarchy, limiting the number of concurrent philosophers, or implementing a protocol that imposes a specific order for acquiring forks.</p>
+    <button onclick="location.href='diningPhilosophers/dining.html'">Simulate</button></div>
+</body>
+</html>

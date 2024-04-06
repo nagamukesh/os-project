@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  justify-content: center; /* Center contents horizontally */
+  align-items: center; /* Center contents vertically */
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif, sans-serif;
+  color: #000000;
+}
+
+body {
+  background-color: #c4c0c0; /* Light Gray */
+  background: url(https://img.freepik.com/free-vector/fruits-corner-border-paper-textured-background_53876-99176.jpg)no-repeat;
+  background-size: cover
+}
+
+.producer,
+.consumer {
+  padding: 20px;
+  margin: 50px;
+  background-color: rgba(99, 213, 228, 0.336); /* Add some color */
+  width: 200px; /* Increase the width */
+  height: 150px; /* Increase the height */
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+}
+
+.producer-button,
+.consumer-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: 1px solid black;
+  color: #ffffff; /* Text color */
+  background-color: #100975; /* Button color */
+  cursor: pointer;
+  border-radius: 8px; /* Add rounded corners */
+
+}
+
+.producer-button:hover,
+.consumer-button:hover {
+  background-color: #2980b9; /* Button color on hover */
+}
+
+
+.buffer{
+  padding: 20px;
+  margin: 50px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(214, 27, 199, 0.3);
+  background-color: rgba(99, 213, 228, 0.336); /* Add some color */
+  width: 200px; /* Increase the width */
+  height: 300px; /* Increase the height */
+  border-radius: 12px;
+}
+.button-container {
+  margin-top: 10px;
+}
+
+#buffer-content {
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: white; /* Add some color */
+}
+
+.fruit-basket {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 0 auto; /* Center horizontally */
+  margin-top: 20px;
+  width: 1200px; /* Increase the width */
+  height: 150px; /* Increase the height */
+  border-radius: 12px;
+
+}
+
+.fruit-image {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+}
+
+.warning-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.warning-message {
+  background-color: #ffcccc;
+  color: #ff0000;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
