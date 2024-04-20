@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,90 +10,120 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <style>
-    * {
-        box-sizing: border-box;
-        border-color:#fcba28;
+    /* Updated styles to match Page Replacement Visualizer */
+    body {
+        background-color: #00205B;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
     }
-    body{
-        background-color: #0f0d0e;
+
+    .heading {
+        text-align: center;
+        color: #ffffff;
+        margin-top: 1rem;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .card {
+        background-color: #DC143C;
+        border: 5px solid #FCBA28;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ffffff;
+        border-radius: 5px;
+        box-sizing: border-box;
+        color: #ffffff;
+        background-color: #00205B;
+    }
+
+    .frmBtn {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #ffffff;
+    }
+
+    .frmBtn.btn-success {
+        background-color: #DC143C;
+    }
+
+    .frmBtn.btn-danger {
+        background-color: #960018;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        border: 2px solid #FCBA28;
+        padding: 8px;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    th {
+        background-color: #DC143C;
+    }
+
+    .summary {
+        background-color: #DC143C;
+        border: 1px solid #FCBA28;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .summary p {
+        margin: 5px 0;
+    }
+
+    .summary p b {
+        color: #FCBA28;
+    }
+
+    .btn-block {
+        display: block;
+        width: 100%;
     }
 
     .flex-container {
         display: flex;
-    }
-    .heading{
-        text-align: center;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .flex-child {
-        flex: 1;
+        margin: 0 10px;
+        margin-bottom: 20px;
+    }
+    .frmBtn.btn-success:hover {
+    background-color: #960018;
     }
 
-    .flex-child:first-child {
-        margin-right: 20px;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 3rem;
-    }
-    #tbl1{
-        color: #FCBA28;
-    }
-    #tbl2{
-        color: #FCBA28;
-    }
-    #tbl3{
-        color: #FCBA28;
-    }
-    #tbl4{
-        color: #FCBA28;
-    }
-    #tbl5{
-        color: #FCBA28;
-    }
-
-    .first {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #0f0d0e;
-        color: #fcba28;
-    }
-
-    .second {
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 20px;
-        background-color: #030507;
-        color: #fcba28;
-    }
-
-    .frmBtn {
-        width: 200px;
-        margin: 10px;
-    }
-
-    .summary {
-        background-color: #040608;
-
-    }
-
-    .table-bordered td,
-    .table-bordered th,
-    .table-bordered tr {
-        border-color: black !important;
-        border-width: 2px;
-    }
+    
 </style>
-
 <body>
     <div class="container">
         <div class="first card border border-dark">
@@ -114,19 +143,19 @@
                     class="frmBtn btn btn-lg btn-block btn-success" value="COMPARE">
             </div>
             <div class="button">
-                <input id="btn2" style="background-color: #ff0000;" type="button" onclick="enableButton1(); reset();"
-                    class="frmBtn btn btn-lg btn-block btn-danger" value="RESET">
+                <input id="btn2"  type="button" onclick="enableButton1(); reset();"
+                    class="frmBtn btn btn-lg btn-block btn-success" value="RESET">
             </div>
         </div>
         <div class="second" id="SUM" style="display:none;">
             <div class="heading">
                 <h1>COMPARISON</h1>
             </div>
-            <div class="heading">
-                <h2>First In First Out</h2>
-            </div>
             <div class="flex-container">
                 <div class="flex-child">
+                    <div class="heading">
+                        <h2>First In First Out</h2>
+                    </div>
                     <div class="data">
                         <table id="tbl1" class="table table-bordered">
                             <thead>
@@ -142,13 +171,10 @@
                         <p id="hit_rate1"></p>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="heading">
-                <h2>Optimal</h2>
-            </div>
-            <div class="flex-container">
                 <div class="flex-child">
+                    <div class="heading">
+                        <h2>Optimal</h2>
+                    </div>
                     <div class="data">
                         <table id="tbl2" class="table table-bordered">
                             <thead>
@@ -164,13 +190,10 @@
                         <p id="hit_rate2"></p>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="heading">
-                <h2>Least Recently Used</h2>
-            </div>
-            <div class="flex-container">
                 <div class="flex-child">
+                    <div class="heading">
+                        <h2>Least Recently Used</h2>
+                    </div>
                     <div class="data">
                         <table id="tbl3" class="table table-bordered">
                             <thead>
@@ -186,13 +209,10 @@
                         <p id="hit_rate3"></p>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="heading">
-                <h2>Most Recently Used</h2>
-            </div>
-            <div class="flex-container">
                 <div class="flex-child">
+                    <div class="heading">
+                        <h2>Most Recently Used</h2>
+                    </div>
                     <div class="data">
                         <table id="tbl5" class="table table-bordered">
                             <thead>
@@ -208,12 +228,10 @@
                         <p id="hit_rate5"></p>
                     </div>
                 </div>
-            </div>
-            <div class="heading">
-                <h2>Random</h2>
-            </div>
-            <div class="flex-container">
                 <div class="flex-child">
+                    <div class="heading">
+                        <h2>Random</h2>
+                    </div>
                     <div class="data">
                         <table id="tbl4" class="table table-bordered">
                             <thead>

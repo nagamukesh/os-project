@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,125 +7,130 @@
     <title>Page Replacement Visualization</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #00205B;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            padding-top: 50px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background-color: #DC143C;
+            color: #ffffff;
+            border-radius: 5px;
+            border: 5px solid #FCBA28;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-custom {
+            background-color: #DC143C;
+            border-color: #DC143C;
+        }
+
+        .btn-custom:hover {
+            background-color: #960018;
+            border-color: #960018;
+        }
+
+        .summary {
+            background-color: #DC143C;
+            color: #ffffff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .table-bordered td,
+        .table-bordered th,
+        .table-bordered tr {
+            border-radius: 5px;
+            border: 2px solid #FCBA28;
+            color: #ffffff;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: #ffffff;
+            background-color: #00205B;
+        }
+    </style>
 </head>
-<style>
-    * {
-        box-sizing: border-box;
-    }
-    body{
-        background-color: #0f0d0e;
-    }
-    .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 3rem;
-    }
-   #tbl{
-        color: #FCBA28;
-    }
-
-    .first {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #0f0d0e;
-        color: #fcba28;
-        border-radius: 5px;
-        border: 5px solid #FCBA28;
-        border-color: #FCBA28;
-    }
-
-    .second {
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 20px;
-        background-color: #0f0d0e;
-        color: #FCBA28;
-
-    }
-    #dropdown{
-        background-color: #FCBA28;
-    }
-
-    .frmBtn {
-        width: 200px;
-        margin: 10px;
-    }
-
-    .summary {
-        background-color: #0f0d0e;
-        color: #fcba28;
-
-    }
-
-    .table-bordered td,
-    .table-bordered th,
-    .table-bordered tr {
-        border-radius: 5px;
-        border: 2px solid #FCBA28;
-        
-    }
-</style>
-
 <body>
     <div class="container">
-        <div class="first card border border-dark" style="border: 2px solid yellow;">
-            <div class="heading">
-                <h1>PAGE REPLACEMENT VISUALIZER</h1>
-            </div>
-            Enter the Stream of Pages :
-            <div class="input-string">
+        <div class="card">
+            <h1>PAGE REPLACEMENT VISUALIZER</h1>
+            <div class="form-group">
+                <label for="input_string">Enter the Stream of Pages:</label>
                 <input type="text" id="input_string" required>
             </div>
-            Enter the number of Frames :
-            <div class="frame-size">
+            <div class="form-group">
+                <label for="frame_size">Enter the number of Frames:</label>
                 <input id="frame_size" placeholder="" type="number" name="frame" min="1" required>
             </div>
-            <label for="algo">Choose the Algorithm : </label>
-            <div class="algorithm">
+            <div class="form-group">
+                <label for="algo">Choose the Algorithm:</label>
                 <select id="drop_down" name="algo" required>
                     <option value="" disabled selected>Select your option</option>
-                    <option value="FIFO">First In First Out </option>
+                    <option value="FIFO">First In First Out</option>
                     <option value="Optimal">Optimal</option>
                     <option value="LRU">Least Recently Used</option>
                     <option value="MRU">Most Recently Used</option>
                     <option value="Random">Random</option>
                 </select>
             </div>
-            <div class="button">
-                <input id="btn1" style=background-color:#02b126="button" onclick="disableButton1(); showDiv(); visualize();"
-                    class="frmBtn btn btn-lg btn-block btn-success" value="VISUALIZE">
+            <div class="btn-container">
+                <button id="btn1" class="btn btn-lg btn-success btn-custom" onclick="disableButton1(); showDiv(); visualize();">VISUALIZE</button>
+                <button id="btn2" class="btn btn-lg btn-success btn-custom" onclick="enableButton1(); reset();">RESET</button>
+                <button id="btn3" class="btn btn-lg btn-success btn-custom" onclick="redirect();">COMPARE</button>
             </div>
-            <div class="button">
-                <input id="btn2" style="background-color: #ff0000"; type="button" onclick="enableButton1(); reset();"
-                    class="frmBtn btn btn-lg btn-block btn-danger" value="RESET">
-            </div>
-            <div class="button">
-                <input id="btn3" type="button" onclick="redirect();"
-                    class="frmBtn btn btn-lg btn-block btn-info" value="COMPARE">
-            </div>
-
         </div>
-        <div class="second" id="SUM" style="display:none;">
-            <div class="heading">
-                <h1>VISUALIZATION AND SUMMARY</h1>
-            </div>
+        <div class="card summary" id="SUM" style="display:none;">
+            <h2>VISUALIZATION AND SUMMARY</h2>
             <div class="data">
                 <table id="tbl" class="table table-bordered">
-                    <thead>
-                    </thead>
-                    <tbody>
-                    </tbody>
+                    <thead></thead>
+                    <tbody></tbody>
                 </table>
             </div>
-            <div class="summary card border border-dark align-items-center">
+            <div class="summary-text">
                 <p id="page_miss"></p>
                 <p id="page_hits"></p>
                 <p id="miss_rate"></p>
@@ -134,8 +138,7 @@
             </div>
         </div>
     </div>
-</body>
-<script>
+    <script>
     var numberOfFrames, dropDown, inputString, numberOfPages, pageFaults = 0, pageHits = 0, count = 0, missRate, hitRate;
     var arr = new Array();
     function visualize() {
